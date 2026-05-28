@@ -1,9 +1,17 @@
 <?php
 
-class sinhvienController {
+require_once '../app/core/Controller.php';
 
-    function index()
+class sinhvienController extends Controller {
+
+    public function index()
     {
-        echo "<h1>Trang Sinh Vien</h1>";
+        $model = $this->model('SinhvienModel');
+
+        $data = $model->getAll();
+
+        require_once '../app/views/sinhvien/index.php';
     }
 }
+
+?>
