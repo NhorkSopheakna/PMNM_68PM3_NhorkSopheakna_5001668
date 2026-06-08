@@ -1,23 +1,34 @@
 <?php
 
-class ConnectDB {
+class ConnectDB
+{
+    private $host = "localhost";
+    private $dbname = "68pm34";
+    private $username = "root";
+    private $password = "";
 
-    public $conn;
-
-    public function __construct()
+    public static function Connect()
     {
-        $this->conn = new mysqli(
-            'localhost',
-            'root',
-            '',
-            '68pm34'
-        );
+        $self = new self();
 
-        if ($this->conn->connect_error) {
+        try {
 
-            die('Connect Failed');
+            $conn = new PDO(
+                "mysql:host={$self->host};dbname={$self->dbname};charset=utf8",
+                $self->username,
+                $self->password
+            );
+
+            $conn->setAttribute(
+                PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION
+            );
+
+            return $conn;
+
+        } catch (PDOException $e) {
+
+            die("Connection Error: " . $e->getMessage());
         }
     }
 }
-
-?>

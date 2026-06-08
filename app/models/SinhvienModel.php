@@ -1,24 +1,36 @@
 <?php
 
-require_once '../app/core/ConnectDB.php';
+class SinhvienModel
+{
+    private $conn;
 
-class SinhvienModel extends ConnectDB {
-
-    public function getAll()
+    public function __construct()
     {
-        $sql = "SELECT * FROM sinhvien";
+        $this->conn = ConnectDB::Connect();
+    }
 
-        $result = $this->conn->query($sql);
+    public function getAllSinhvien()
+    {
+        $query = "SELECT * FROM sinhvien";
 
-        $data = [];
+        $stmt = $this->conn->prepare($query);
 
-        while($row = $result->fetch_assoc()) {
+        $stmt->execute();
 
-            $data[] = $row;
-        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        return $data;
+    public function create($hoten, $gioitinh, $mssv)
+    {
+        $query = "INSERT INTO sinhvien(ten, gioitinh, mssv)
+                  VALUES(?, ?, ?)";
+
+        $stmt = $this->conn->prepare($query);
+
+        return $stmt->execute([
+            $hoten,
+            $gioitinh,
+            $mssv
+        ]);
     }
 }
-
-?>

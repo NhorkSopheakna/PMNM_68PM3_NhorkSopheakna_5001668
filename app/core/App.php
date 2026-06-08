@@ -1,33 +1,33 @@
 <?php
 
-class App {
-
+class App
+{
     protected $controller = 'homeController';
     protected $action = 'index';
     protected $params = [];
 
-    public function __construct(){
-
+    public function __construct()
+    {
         $urlProcess = $this->UrlProcess();
 
         // Controller
-        if(isset($urlProcess[0])){
+        if (isset($urlProcess[0])) {
 
-            if(file_exists('../app/controllers/'.$urlProcess[0].'.php')){
+            if (file_exists('../app/controllers/' . $urlProcess[0] . 'Controller.php')) {
 
-                $this->controller = $urlProcess[0];
+                $this->controller = $urlProcess[0] . 'Controller';
                 unset($urlProcess[0]);
             }
         }
 
-        require_once '../app/controllers/'.$this->controller.'.php';
+        require_once '../app/controllers/' . $this->controller . '.php';
 
         $this->controller = new $this->controller;
 
         // Action
-        if(isset($urlProcess[1])){
+        if (isset($urlProcess[1])) {
 
-            if(method_exists($this->controller, $urlProcess[1])){
+            if (method_exists($this->controller, $urlProcess[1])) {
 
                 $this->action = $urlProcess[1];
                 unset($urlProcess[1]);
@@ -43,13 +43,16 @@ class App {
         );
     }
 
-    public function UrlProcess(){
+    public function UrlProcess()
+    {
+        if (isset($_GET['url'])) {
 
-        if(isset($_GET['url'])){
-
-            return explode('/',
-                filter_var(trim($_GET['url'], '/'))
+            return explode(
+                '/',
+                filter_var(trim($_GET['url'], '/'), FILTER_SANITIZE_URL)
             );
         }
+
+        return [];
     }
 }

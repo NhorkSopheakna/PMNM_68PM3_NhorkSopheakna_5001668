@@ -1,33 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Danh Sach Sinh Vien</title>
-</head>
-<body>
+<h1>Danh Sách Sinh Viên</h1>
 
-    <h1>Danh Sach Sinh Vien</h1>
+<br>
 
-    <table border="1" cellpadding="10">
+<a class="btn" href="index.php?url=sinhvien/create">
+    Thêm Sinh Viên
+</a>
 
-        <tr>
-            <th>STT</th>
-            <th>Ten</th>
-            <th>Gioi Tinh</th>
-            <th>MSSV</th>
-        </tr>
+<br><br>
 
-        <?php foreach($data as $sv): ?>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Giới Tính</th>
+        <th>MSSV</th>
+    </tr>
 
-        <tr>
-            <td><?= $sv['stt'] ?></td>
-            <td><?= $sv['ten'] ?></td>
-            <td><?= $sv['gioitinh'] ?></td>
-            <td><?= $sv['mssv'] ?></td>
-        </tr>
+    <?php foreach($sinhviens as $sv): ?>
 
-        <?php endforeach; ?>
+    <tr>
+        <td><?= $sv['stt'] ?></td>
+        <td><?= $sv['ten'] ?></td>
+        <td><?= $sv['gioitinh'] ?></td>
+        <td><?= $sv['mssv'] ?></td>
+    </tr>
 
-    </table>
+    <?php endforeach; ?>
 
-</body>
-</html>
+</table>
