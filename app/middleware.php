@@ -6,7 +6,10 @@ class middleware
     {
         if (!isset($_SESSION['username'])) {
 
-            header('Location: /home/login');
+            header(
+                'Location: /PMNM_68PM3_NhorkSopheakna_5001668/public/index.php?url=home/login'
+            );
+
             exit();
         }
     }

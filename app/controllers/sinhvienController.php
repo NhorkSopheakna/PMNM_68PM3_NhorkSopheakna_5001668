@@ -6,11 +6,25 @@ class sinhvienController extends Controller
     {
         $sinhvienModel = $this->model('SinhvienModel');
 
-        $sinhviens = $sinhvienModel->getAllSinhvien();
+        $page = $_GET['page'] ?? 1;
+
+        $limit = 3;
+
+        $offset = ($page - 1) * $limit;
+
+        $search = $_GET['search'] ?? '';
+
+        $pagingData = $sinhvienModel->paging(
+            $limit,
+            $offset,
+            $search
+        );
 
         extract([
             'viewname' => 'sinhvien/index',
-            'sinhviens' => $sinhviens
+            'sinhviens' => $pagingData['sinhviens'],
+            'totalPage' => $pagingData['totalPage'],
+            'search' => $search
         ]);
 
         require_once '../app/views/layout/masterlayout.php';

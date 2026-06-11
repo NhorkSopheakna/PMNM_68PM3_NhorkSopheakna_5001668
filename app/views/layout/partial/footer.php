@@ -1,8 +1,11 @@
 </div>
 
-<div style="background-color: blue;color:white;padding:15px;text-align:center;">
-    © 2026 - PMNM 68PM34 - Nhork Sopheakna
+<div
+style="
+height:60px;
+background-color:blue;
+position:fixed;
+bottom:0;
+width:100%;
+">
 </div>
-
-</body>
-</html>

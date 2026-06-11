@@ -1,69 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Quản Lý Sinh Viên</title>
+<style>
 
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            margin:0;
-            padding:0;
-        }
+body{
+    font-family: Arial;
+    margin:0;
+}
 
-        .header{
-            background-color: red;
-            color:white;
-            padding:15px;
-        }
+.header{
+    height:60px;
+    background-color: red;
+}
 
-        .menu{
-            background:#f4f4f4;
-            padding:10px;
-        }
+.content{
+    width:80%;
+    margin:auto;
+    padding-top:20px;
+}
 
-        .menu a{
-            text-decoration:none;
-            margin-right:15px;
-            font-weight:bold;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+}
 
-        .container{
-            padding:20px;
-        }
+th{
+    background:#a8d5a2;
+    padding:10px;
+}
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
+td{
+    padding:10px;
+    border:1px solid #ddd;
+}
 
-        table, th, td{
-            border:1px solid black;
-        }
+.btn-add{
+    background:#8bc34a;
+    color:white;
+    padding:8px 12px;
+    text-decoration:none;
+}
 
-        th, td{
-            padding:10px;
-        }
+.btn-edit{
+    background:orange;
+    color:white;
+    padding:5px 10px;
+    text-decoration:none;
+}
 
-        .btn{
-            background:green;
-            color:white;
-            padding:8px 12px;
-            text-decoration:none;
-        }
-    </style>
-</head>
+.btn-delete{
+    background:#e57373;
+    color:white;
+    padding:5px 10px;
+    text-decoration:none;
+}
 
-<body>
+</style>
 
-<div class="header">
-    <h2>Hệ Thống Quản Lý Sinh Viên</h2>
-</div>
+<div class="header"></div>
 
-<div class="menu">
-    <a href="index.php?url=home/index">Home</a>
-    <a href="index.php?url=sinhvien">Sinh Viên</a>
-    <a href="index.php?url=auth/logout">Logout</a>
-</div>
-
-<div class="container">
+<div class="content">

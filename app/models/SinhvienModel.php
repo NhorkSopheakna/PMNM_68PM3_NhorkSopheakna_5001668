@@ -33,4 +33,72 @@ class SinhvienModel
             $mssv
         ]);
     }
+
+
+    public function search($keyword = '')
+    {
+        $query = "
+            SELECT *
+            FROM sinhvien
+            WHERE mssv LIKE ?
+        ";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute([
+            "%$keyword%"
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function delete($id)
+    {
+        $sql =
+        "DELETE FROM sinhvien
+        WHERE stt=?";
+
+        $stmt =
+        $this->conn->prepare($sql);
+
+        return $stmt->execute([$id]);
+    }
+
+    public function paging($limit = 5, $offset = 0, $search = '')
+    {
+        $query = "
+            SELECT *
+            FROM sinhvien
+            WHERE mssv LIKE ?
+            LIMIT $limit OFFSET $offset
+        ";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute([
+            "%$search%"
+        ]);
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $countQuery = $this->conn->prepare(
+            "SELECT COUNT(*) FROM sinhvien WHERE mssv LIKE ?"
+        );
+
+        $countQuery->execute([
+            "%$search%"
+        ]);
+
+        $totalRecord = $countQuery->fetchColumn();
+
+        $totalPage = ceil($totalRecord / $limit);
+
+        return [
+            'sinhviens' => $result,
+            'totalPage' => $totalPage
+        ];
+    }
+
+     
 }
