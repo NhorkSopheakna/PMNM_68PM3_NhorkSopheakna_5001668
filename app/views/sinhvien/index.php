@@ -1,51 +1,36 @@
 <h1>Danh Sách Sinh Viên</h1>
 
-<br>
+<div style="display:flex;justify-content:space-between;align-items:center;">
 
-<div style="display:flex; justify-content:space-between; margin-bottom:0px;">
-<a class="btn-add"
-href="index.php?url=sinhvien/create">
-    + Thêm mới
-</a>
+    <a
+    class="btn-add"
+    href="index.php?url=sinhvien/create">
+        + Thêm mới
+    </a>
 
-<form method="GET">
-
-
-        <input
-            type="hidden"
-            name="url"
-            value="sinhvien"
-        >
+    <form method="GET">
 
         <input
-            type="text"
-            name="search"
-            value="<?= $search ?>"
-            placeholder="Nhập MSSV..."
-            style="
-                padding:8px;
-                height:36px;
-            "
-        >
+        type="hidden"
+        name="url"
+        value="sinhvien">
 
-        <button
-            type="submit"
-            style="
-                background:green;
-                color:white;
-                padding:8px 12px;
-                border:none;
-                cursor:pointer;
-                height:36px;
-            "
-        >
+        <input
+        type="text"
+        name="search"
+        placeholder="Nhập MSSV..."
+        value="<?= $search ?>">
+
+        <button type="submit">
             Tìm kiếm
         </button>
 
-</form>
+    </form>
+
 </div>
 
-<br><br>
+<br>
+<br>
 
 <table border="1" cellpadding="10">
 
@@ -66,21 +51,22 @@ href="index.php?url=sinhvien/create">
         <td><?= $sv['gioitinh'] ?></td>
         <td><?= $sv['mssv'] ?></td>
 
-        <td>
+    <td>
 
-            <a
-            href="index.php?url=sinhvien/edit/<?= $sv['stt'] ?>">
-                Sửa
-            </a>
+        <a
+        class="btn-edit"
+        href="index.php?url=sinhvien/edit/<?= $sv['stt'] ?>">
+            Sửa
+        </a>
 
-            |
+        <a
+        class="btn-delete"
+        href="index.php?url=sinhvien/delete/<?= $sv['stt'] ?>"
+        onclick="return confirm('Xóa sinh viên này?')">
+            Xóa
+        </a>
 
-            <a
-            href="index.php?url=sinhvien/delete/<?= $sv['stt'] ?>">
-                Xóa
-            </a>
-
-        </td>
+    </td>
 
     </tr>
 
@@ -90,7 +76,9 @@ href="index.php?url=sinhvien/create">
 
 <br>
 
-<?php for($i = 1; $i <= $totalPage; $i++): ?>
+<div class="pagination">
+
+<?php for($i=1;$i<=$totalPage;$i++): ?>
 
     <a
     href="index.php?url=sinhvien&page=<?= $i ?>&search=<?= $search ?>">
@@ -98,3 +86,5 @@ href="index.php?url=sinhvien/create">
     </a>
 
 <?php endfor; ?>
+
+</div>

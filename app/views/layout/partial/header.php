@@ -32,7 +32,7 @@ td{
 }
 
 .btn-add{
-    background:#8bc34a;
+    background:green;
     color:white;
     padding:8px 12px;
     text-decoration:none;
@@ -46,11 +46,30 @@ td{
 }
 
 .btn-delete{
-    background:#e57373;
+    background:red;
     color:white;
     padding:5px 10px;
     text-decoration:none;
 }
+
+.search-box{
+    float:right;
+    }
+
+.pagination{
+    margin-top:20px;
+    text-align:center;
+    }
+
+.pagination a{
+    padding:8px 12px;
+    border:1px solid #ccc;
+    text-decoration:none;
+     margin:2px;
+    }
+
+
+        
 
 </style>
 

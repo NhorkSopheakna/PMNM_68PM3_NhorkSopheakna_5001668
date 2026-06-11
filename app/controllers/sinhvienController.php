@@ -63,4 +63,51 @@ class sinhvienController extends Controller
             echo "Them moi sinh vien that bai";
         }
     }
+
+    public function delete($id)
+    {
+        $sinhvienModel = $this->model('SinhvienModel');
+
+        $sinhvienModel->delete($id);
+
+        header('Location: index.php?url=sinhvien');
+        exit();
+    }
+
+    public function edit($id)
+    {
+        $sinhvienModel = $this->model('SinhvienModel');
+
+        $sinhvien = $sinhvienModel->findById($id);
+
+        extract([
+            'viewname' => 'sinhvien/edit',
+            'sinhvien' => $sinhvien
+        ]);
+
+        require_once '../app/views/layout/masterlayout.php';
+    }
+
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $id = $_POST['id'];
+            $ten = $_POST['hoten'];
+            $gioitinh = $_POST['gioitinh'];
+            $mssv = $_POST['mssv'];
+
+            $sinhvienModel = $this->model('SinhvienModel');
+
+            $sinhvienModel->update(
+                $id,
+                $ten,
+                $gioitinh,
+                $mssv
+            );
+
+            header('Location: index.php?url=sinhvien');
+            exit();
+        }
+    }
 }

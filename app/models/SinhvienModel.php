@@ -100,5 +100,41 @@ class SinhvienModel
         ];
     }
 
+    public function findById($id)
+    {
+        $sql = "
+            SELECT *
+            FROM sinhvien
+            WHERE stt=?
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    public function update($id, $ten, $gioitinh, $mssv)
+    {
+        $sql = "
+            UPDATE sinhvien
+            SET ten=?,
+                gioitinh=?,
+                mssv=?
+            WHERE stt=?
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        return $stmt->execute([
+            $ten,
+            $gioitinh,
+            $mssv,
+            $id
+        ]);
+    }
+
      
 }
