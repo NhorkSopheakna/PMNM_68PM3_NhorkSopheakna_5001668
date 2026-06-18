@@ -8,44 +8,51 @@
 
 <br><br>
 
-<table border="1">
+<table border="1" cellpadding="10">
 
-<tr>
-    <th>Mã lớp</th>
-    <th>Tên lớp</th>
-    <th>Ghi chú</th>
-    <th>Thao tác</th>
-</tr>
+    <tr>
+        <th>STT</th>
+        <th>Mã lớp</th>
+        <th>Tên lớp</th>
+        <th>Ghi chú</th>
+        <th>Thao tác</th>
+    </tr>
 
-<?php foreach($lophocs as $lop): ?>
+    <?php
+    $stt = 1;
 
-<tr>
+    foreach($lophocs as $lop):
+    ?>
 
-<td><?= $lop['malop'] ?></td>
+    <tr>
 
-<td><?= $lop['tenlop'] ?></td>
+        <td><?= $stt++ ?></td>
 
-<td><?= $lop['ghichu'] ?></td>
+        <td><?= $lop['malop'] ?></td>
 
-<td>
+        <td><?= $lop['tenlop'] ?></td>
 
-<a
-href="index.php?url=lophoc/edit/<?= $lop['malop'] ?>">
-Sửa
-</a>
+        <td><?= $lop['ghichu'] ?></td>
 
-|
+        <td>
 
-<a
-onclick="return confirm('Xóa lớp này?')"
-href="index.php?url=lophoc/delete/<?= $lop['malop'] ?>">
-Xóa
-</a>
+            <a
+                href="index.php?url=lophoc/edit/<?= $lop['malop'] ?>">
+                Sửa
+            </a>
 
-</td>
+            |
 
-</tr>
+            <a
+                onclick="return confirm('Bạn có chắc muốn xóa?')"
+                href="index.php?url=lophoc/delete/<?= $lop['malop'] ?>">
+                Xóa
+            </a>
 
-<?php endforeach; ?>
+        </td>
+
+    </tr>
+
+    <?php endforeach; ?>
 
 </table>

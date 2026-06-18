@@ -12,9 +12,9 @@ class sinhvienController extends Controller
 
         $search = $_GET['search'] ?? '';
 
-        $malop = $_GET['malop'] ?? '';
+        $limit = $pageSize;
 
-        $sort = $_GET['sort'] ?? '';
+        $offset = ($page - 1) * $limit;
 
         $pagingData = $sinhvienModel->paging(
             $limit,
@@ -43,24 +43,24 @@ class sinhvienController extends Controller
 
     public function store()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
             $hoten = $_POST['hoten'] ?? '';
             $gioitinh = $_POST['gioitinh'] ?? '';
             $mssv = $_POST['mssv'] ?? '';
+            $malop = $_POST['malop'] ?? '';
 
             $sinhvienModel = $this->model('SinhvienModel');
-
-            $lophocModel = $this->model('LophocModel');
-            $lophocs = $lophocModel->getAllLophoc();
 
             $result = $sinhvienModel->create(
                 $hoten,
                 $gioitinh,
-                $mssv
+                $mssv,
+                $malop
             );
 
-            if ($result) {
+            if ($result)
+            {
                 header('Location: index.php?url=sinhvien');
                 exit();
             }
@@ -95,8 +95,8 @@ class sinhvienController extends Controller
 
     public function update()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
             $id = $_POST['id'];
             $ten = $_POST['hoten'];
             $gioitinh = $_POST['gioitinh'];

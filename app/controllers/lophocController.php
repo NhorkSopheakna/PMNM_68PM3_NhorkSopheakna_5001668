@@ -8,23 +8,27 @@ class lophocController extends Controller
 
         $lophocs = $lophocModel->getAllLophoc();
 
-        $this->view('layout/masterlayout', [
+        extract([
             'viewname' => 'lophoc/index',
             'lophocs' => $lophocs
         ]);
+
+        require_once '../app/views/layout/masterlayout.php';
     }
 
     public function create()
     {
-        $this->view('layout/masterlayout', [
+        extract([
             'viewname' => 'lophoc/create'
         ]);
+
+        require_once '../app/views/layout/masterlayout.php';
     }
 
     public function store()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
             $malop = $_POST['malop'];
             $tenlop = $_POST['tenlop'];
             $ghichu = $_POST['ghichu'];
@@ -37,9 +41,7 @@ class lophocController extends Controller
                 $ghichu
             );
 
-            header(
-                'Location: /PMNM_68PM3_NhorkSopheakna_5001668/public/index.php?url=lophoc'
-            );
+            header('Location: index.php?url=lophoc');
         }
     }
 
@@ -47,18 +49,20 @@ class lophocController extends Controller
     {
         $lophocModel = $this->model('LophocModel');
 
-        $lophoc = $lophocModel->getLophocById($malop);
+        $lophoc = $lophocModel->findById($malop);
 
-        $this->view('layout/masterlayout', [
+        extract([
             'viewname' => 'lophoc/edit',
             'lophoc' => $lophoc
         ]);
+
+        require_once '../app/views/layout/masterlayout.php';
     }
 
     public function update()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
             $malop = $_POST['malop'];
             $tenlop = $_POST['tenlop'];
             $ghichu = $_POST['ghichu'];
@@ -71,9 +75,7 @@ class lophocController extends Controller
                 $ghichu
             );
 
-            header(
-                'Location: /PMNM_68PM3_NhorkSopheakna_5001668/public/index.php?url=lophoc'
-            );
+            header('Location: index.php?url=lophoc');
         }
     }
 
@@ -83,8 +85,6 @@ class lophocController extends Controller
 
         $lophocModel->delete($malop);
 
-        header(
-            'Location: /PMNM_68PM3_NhorkSopheakna_5001668/public/index.php?url=lophoc'
-        );
+        header('Location: index.php?url=lophoc');
     }
 }

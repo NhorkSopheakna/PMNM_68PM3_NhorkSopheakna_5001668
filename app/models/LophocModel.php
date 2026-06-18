@@ -11,9 +11,9 @@ class LophocModel
 
     public function getAllLophoc()
     {
-        $query = "SELECT * FROM lophoc";
+        $sql = "SELECT * FROM lophoc";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($sql);
 
         $stmt->execute();
 
@@ -22,10 +22,12 @@ class LophocModel
 
     public function create($malop, $tenlop, $ghichu)
     {
-        $query = "INSERT INTO lophoc(malop, tenlop, ghichu)
-                  VALUES (?, ?, ?)";
+        $sql = "
+            INSERT INTO lophoc(malop,tenlop,ghichu)
+            VALUES(?,?,?)
+        ";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([
             $malop,
@@ -34,11 +36,15 @@ class LophocModel
         ]);
     }
 
-    public function getLophocById($malop)
+    public function findById($malop)
     {
-        $query = "SELECT * FROM lophoc WHERE malop = ?";
+        $sql = "
+            SELECT *
+            FROM lophoc
+            WHERE malop=?
+        ";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($sql);
 
         $stmt->execute([$malop]);
 
@@ -47,11 +53,14 @@ class LophocModel
 
     public function update($malop, $tenlop, $ghichu)
     {
-        $query = "UPDATE lophoc
-                  SET tenlop = ?, ghichu = ?
-                  WHERE malop = ?";
+        $sql = "
+            UPDATE lophoc
+            SET tenlop=?,
+                ghichu=?
+            WHERE malop=?
+        ";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([
             $tenlop,
@@ -62,10 +71,15 @@ class LophocModel
 
     public function delete($malop)
     {
-        $query = "DELETE FROM lophoc WHERE malop = ?";
+        $sql = "
+            DELETE FROM lophoc
+            WHERE malop=?
+        ";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($sql);
 
-        return $stmt->execute([$malop]);
+        return $stmt->execute([
+            $malop
+        ]);
     }
 }

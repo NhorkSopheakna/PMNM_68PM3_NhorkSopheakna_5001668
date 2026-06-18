@@ -1,3 +1,10 @@
+<a href="index.php?url=sinhvien">
+    Quản lý sinh viên
+</a>
+
+<a href="index.php?url=lophoc">
+    Quản lý lớp học
+</a>
 <style>
 
 body{

@@ -1,34 +1,39 @@
-<h1>Sửa lớp học</h1>
+<h1>Cập nhật lớp học</h1>
 
 <form
 action="index.php?url=lophoc/update"
 method="POST">
 
-<input
-type="hidden"
-name="malop"
-value="<?= $lophoc['malop'] ?>">
+    <p>Mã lớp</p>
 
-<label>Tên lớp</label>
+    <input
+    type="text"
+    name="malop"
+    value="<?= $lophoc['malop'] ?>"
+    readonly>
 
-<input
-type="text"
-name="tenlop"
-value="<?= $lophoc['tenlop'] ?>">
+    <br><br>
 
-<br><br>
+    <p>Tên lớp</p>
 
-<label>Ghi chú</label>
+    <input
+    type="text"
+    name="tenlop"
+    value="<?= $lophoc['tenlop'] ?>">
 
-<input
-type="text"
-name="ghichu"
-value="<?= $lophoc['ghichu'] ?>">
+    <br><br>
 
-<br><br>
+    <p>Ghi chú</p>
 
-<button>
-Cập nhật
-</button>
+    <input
+    type="text"
+    name="ghichu"
+    value="<?= $lophoc['ghichu'] ?>">
+
+    <br><br>
+
+    <button type="submit">
+        Cập nhật
+    </button>
 
 </form>

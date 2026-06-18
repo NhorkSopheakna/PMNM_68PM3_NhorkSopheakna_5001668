@@ -4,32 +4,32 @@
 action="index.php?url=lophoc/store"
 method="POST">
 
-<label>Mã lớp</label>
+    <p>Mã lớp</p>
 
-<input
-type="text"
-name="malop">
+    <input
+    type="text"
+    name="malop">
 
-<br><br>
+    <br><br>
 
-<label>Tên lớp</label>
+    <p>Tên lớp</p>
 
-<input
-type="text"
-name="tenlop">
+    <input
+    type="text"
+    name="tenlop">
 
-<br><br>
+    <br><br>
 
-<label>Ghi chú</label>
+    <p>Ghi chú</p>
 
-<input
-type="text"
-name="ghichu">
+    <input
+    type="text"
+    name="ghichu">
 
-<br><br>
+    <br><br>
 
-<button>
-Thêm
-</button>
+    <button type="submit">
+        Thêm
+    </button>
 
 </form>

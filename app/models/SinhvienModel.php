@@ -20,21 +20,22 @@ class SinhvienModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($hoten,$gioitinh,$mssv,$malop)
+    public function create($hoten, $gioitinh, $mssv, $malop)
     {
-        $query = "INSERT INTO sinhvien(ten,gioitinh,mssv,malop)
-                  VALUES(?,?,?,?)";
+        $query = "
+            INSERT INTO sinhvien(ten, gioitinh, mssv, malop)
+            VALUES (?, ?, ?, ?)
+        ";
 
         $stmt = $this->conn->prepare($query);
-        
 
         return $stmt->execute([
             $hoten,
             $gioitinh,
-            $mssv
+            $mssv,
+            $malop
         ]);
     }
-
 
     public function search($keyword = '')
     {
@@ -42,27 +43,29 @@ class SinhvienModel
             SELECT *
             FROM sinhvien sv
             LEFT JOIN lophoc lh
-            ON sv.malop=lh.malop
+            ON sv.malop = lh.malop
+            WHERE sv.mssv LIKE ?
+               OR sv.ten LIKE ?
         ";
 
         $stmt = $this->conn->prepare($query);
 
         $stmt->execute([
+            "%$keyword%",
             "%$keyword%"
         ]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public function delete($id)
     {
-        $sql =
-        "DELETE FROM sinhvien
-        WHERE stt=?";
+        $sql = "
+            DELETE FROM sinhvien
+            WHERE stt=?
+        ";
 
-        $stmt =
-        $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([$id]);
     }
@@ -73,7 +76,7 @@ class SinhvienModel
             SELECT *
             FROM sinhvien
             WHERE mssv LIKE ?
-            LIMIT $limit OFFSET $offset
+            LIMIT $offset, $limit
         ";
 
         $stmt = $this->conn->prepare($query);
@@ -85,7 +88,11 @@ class SinhvienModel
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $countQuery = $this->conn->prepare(
-            "SELECT COUNT(*) FROM sinhvien WHERE mssv LIKE ?"
+            "
+            SELECT COUNT(*)
+            FROM sinhvien
+            WHERE mssv LIKE ?
+            "
         );
 
         $countQuery->execute([
@@ -117,7 +124,6 @@ class SinhvienModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
     public function update($id, $ten, $gioitinh, $mssv)
     {
         $sql = "
@@ -137,6 +143,4 @@ class SinhvienModel
             $id
         ]);
     }
-
-     
 }
