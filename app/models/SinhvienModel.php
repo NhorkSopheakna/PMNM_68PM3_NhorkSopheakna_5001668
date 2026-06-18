@@ -20,12 +20,13 @@ class SinhvienModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($hoten, $gioitinh, $mssv)
+    public function create($hoten,$gioitinh,$mssv,$malop)
     {
-        $query = "INSERT INTO sinhvien(ten, gioitinh, mssv)
-                  VALUES(?, ?, ?)";
+        $query = "INSERT INTO sinhvien(ten,gioitinh,mssv,malop)
+                  VALUES(?,?,?,?)";
 
         $stmt = $this->conn->prepare($query);
+        
 
         return $stmt->execute([
             $hoten,
@@ -39,8 +40,9 @@ class SinhvienModel
     {
         $query = "
             SELECT *
-            FROM sinhvien
-            WHERE mssv LIKE ?
+            FROM sinhvien sv
+            LEFT JOIN lophoc lh
+            ON sv.malop=lh.malop
         ";
 
         $stmt = $this->conn->prepare($query);

@@ -8,22 +8,22 @@
         + Thêm mới
     </a>
 
-    <form method="GET">
+    <form>
 
-        <input
-        type="hidden"
-        name="url"
-        value="sinhvien">
+        <input type="text"
+        name="search">
 
-        <input
-        type="text"
-        name="search"
-        placeholder="Nhập MSSV..."
-        value="<?= $search ?>">
+        <select name="malop">
 
-        <button type="submit">
-            Tìm kiếm
-        </button>
+        <option value="">
+        --- Tất cả lớp ---
+        </option>
+
+        </select>
+
+        <button>Tìm kiếm</button>
+
+        <a>Đặt lại</a>
 
     </form>
 

@@ -8,11 +8,13 @@ class sinhvienController extends Controller
 
         $page = $_GET['page'] ?? 1;
 
-        $limit = 3;
-
-        $offset = ($page - 1) * $limit;
+        $pageSize = $_GET['pageSize'] ?? 10;
 
         $search = $_GET['search'] ?? '';
+
+        $malop = $_GET['malop'] ?? '';
+
+        $sort = $_GET['sort'] ?? '';
 
         $pagingData = $sinhvienModel->paging(
             $limit,
@@ -48,6 +50,9 @@ class sinhvienController extends Controller
             $mssv = $_POST['mssv'] ?? '';
 
             $sinhvienModel = $this->model('SinhvienModel');
+
+            $lophocModel = $this->model('LophocModel');
+            $lophocs = $lophocModel->getAllLophoc();
 
             $result = $sinhvienModel->create(
                 $hoten,
