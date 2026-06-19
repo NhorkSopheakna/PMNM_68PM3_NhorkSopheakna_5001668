@@ -1,48 +1,97 @@
-<h1>Sửa Sinh Viên</h1>
+<div class="form-card">
 
-<form action="index.php?url=sinhvien/update" method="POST">
+    <div class="form-title">
+        Sửa thông tin sinh viên
+    </div>
 
-    <input
-        type="hidden"
-        name="id"
-        value="<?= $sinhvien['stt'] ?>"
-    >
+    <div class="form-body">
 
-    <label>Họ tên</label>
-    <br>
+        <form action="index.php?url=sinhvien/update" method="post">
 
-    <input
-        type="text"
-        name="hoten"
-        value="<?= $sinhvien['ten'] ?>"
-    >
+            <input type="hidden"
+                   name="id"
+                   value="<?= $sinhvien['stt'] ?>">
 
-    <br><br>
+            <div class="form-group">
+                <label>Họ tên *</label>
 
-    <label>Giới tính</label>
-    <br>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="hoten"
+                    value="<?= $sinhvien['ten'] ?>">
+            </div>
 
-    <input
-        type="text"
-        name="gioitinh"
-        value="<?= $sinhvien['gioitinh'] ?>"
-    >
+            <div class="form-group">
+                <label>Giới tính *</label>
 
-    <br><br>
+                <select class="form-control" name="gioitinh">
 
-    <label>MSSV</label>
-    <br>
+                    <option value="Nam"
+                        <?= $sinhvien['gioitinh']=='Nam'?'selected':'' ?>>
+                        Nam
+                    </option>
 
-    <input
-        type="text"
-        name="mssv"
-        value="<?= $sinhvien['mssv'] ?>"
-    >
+                    <option value="Nữ"
+                        <?= $sinhvien['gioitinh']=='Nữ'?'selected':'' ?>>
+                        Nữ
+                    </option>
 
-    <br><br>
+                </select>
 
-    <button type="submit">
-        Cập nhật
-    </button>
+            </div>
 
-</form>
+            <div class="form-group">
+                <label>MSSV *</label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    name="mssv"
+                    value="<?= $sinhvien['mssv'] ?>">
+            </div>
+
+            <div class="form-group">
+                <label>Lớp *</label>
+
+                <select class="form-control" name="malop">
+
+                    <?php foreach($lophocs as $lop): ?>
+
+                    <option
+                        value="<?= $lop['malop'] ?>"
+                        <?= $lop['malop']==$sinhvien['malop']?'selected':'' ?>>
+
+                        <?= $lop['tenlop'] ?>
+
+                    </option>
+
+                    <?php endforeach; ?>
+
+                </select>
+
+            </div>
+
+            <div class="form-action">
+
+                <button class="btn-save">
+                    Cập nhật
+                </button>
+
+                <a class="btn-cancel"
+                   href="index.php?url=sinhvien">
+                    Hủy
+                </a>
+
+                <a class="btn-back"
+                   href="index.php?url=sinhvien">
+                    Quay lại
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

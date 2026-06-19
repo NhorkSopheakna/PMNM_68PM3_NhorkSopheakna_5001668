@@ -2,10 +2,15 @@
 
 <div
 style="
-height:60px;
-background-color:blue;
-position:fixed;
-bottom:0;
-width:100%;
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:15px;
 ">
+
+Copyright © 2026 PMNM 68PM3
+
 </div>
+
+</body>
+</html>

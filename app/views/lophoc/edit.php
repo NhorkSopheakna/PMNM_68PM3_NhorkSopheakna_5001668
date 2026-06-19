@@ -1,39 +1,68 @@
-<h1>Cập nhật lớp học</h1>
+<div class="form-card">
 
-<form
-action="index.php?url=lophoc/update"
-method="POST">
+    <div class="form-title">
+        Sửa thông tin lớp học
+    </div>
 
-    <p>Mã lớp</p>
+    <div class="form-body">
 
-    <input
-    type="text"
-    name="malop"
-    value="<?= $lophoc['malop'] ?>"
-    readonly>
+        <form action="index.php?url=lophoc/update" method="post">
 
-    <br><br>
+            <div class="form-group">
 
-    <p>Tên lớp</p>
+                <label>Mã lớp *</label>
 
-    <input
-    type="text"
-    name="tenlop"
-    value="<?= $lophoc['tenlop'] ?>">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="malop"
+                    value="<?= $lophoc['malop'] ?>"
+                    readonly>
 
-    <br><br>
+            </div>
 
-    <p>Ghi chú</p>
+            <div class="form-group">
 
-    <input
-    type="text"
-    name="ghichu"
-    value="<?= $lophoc['ghichu'] ?>">
+                <label>Tên lớp *</label>
 
-    <br><br>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="tenlop"
+                    value="<?= $lophoc['tenlop'] ?>">
 
-    <button type="submit">
-        Cập nhật
-    </button>
+            </div>
 
-</form>
+            <div class="form-group">
+
+                <label>Ghi chú</label>
+
+                <textarea
+                    class="form-control"
+                    name="ghichu"><?= $lophoc['ghichu'] ?></textarea>
+
+            </div>
+
+            <div class="form-action">
+
+                <button class="btn-save">
+                    Cập nhật
+                </button>
+
+                <a class="btn-cancel"
+                   href="index.php?url=lophoc">
+                    Hủy
+                </a>
+
+                <a class="btn-back"
+                   href="index.php?url=lophoc">
+                    Quay lại
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

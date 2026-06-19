@@ -2,19 +2,56 @@
 
 class lophocController extends Controller
 {
+
     public function index()
     {
         $lophocModel = $this->model('LophocModel');
 
-        $lophocs = $lophocModel->getAllLophoc();
+        $page = $_GET['page'] ?? 1;
+
+        $pageSize = $_GET['pageSize'] ?? 5;
+
+        $search = $_GET['search'] ?? '';
+
+        $sort = $_GET['sort'] ?? '';
+
+        $limit = $pageSize;
+
+        $offset = ($page - 1) * $limit;
+
+
+        $pagingData = $lophocModel->paging(
+            $limit,
+            $offset,
+            $search,
+            $sort
+        );
+
 
         extract([
+
             'viewname' => 'lophoc/index',
-            'lophocs' => $lophocs
+
+            'lophocs' => $pagingData['lophocs'],
+
+            'totalPage' => $pagingData['totalPage'],
+
+            'totalRecord' => $pagingData['totalRecord'],
+
+            'page' => $page,
+
+            'pageSize' => $pageSize,
+
+            'search' => $search,
+
+            'sort' => $sort
+
         ]);
 
         require_once '../app/views/layout/masterlayout.php';
     }
+
+
 
     public function create()
     {
@@ -25,25 +62,30 @@ class lophocController extends Controller
         require_once '../app/views/layout/masterlayout.php';
     }
 
+
+
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $malop = $_POST['malop'];
-            $tenlop = $_POST['tenlop'];
-            $ghichu = $_POST['ghichu'];
 
             $lophocModel = $this->model('LophocModel');
 
             $lophocModel->create(
-                $malop,
-                $tenlop,
-                $ghichu
+
+                $_POST['malop'],
+
+                $_POST['tenlop'],
+
+                $_POST['ghichu']
+
             );
 
-            header('Location: index.php?url=lophoc');
+            header('Location:index.php?url=lophoc');
         }
     }
+
+
 
     public function edit($malop)
     {
@@ -52,32 +94,40 @@ class lophocController extends Controller
         $lophoc = $lophocModel->findById($malop);
 
         extract([
+
             'viewname' => 'lophoc/edit',
+
             'lophoc' => $lophoc
+
         ]);
 
         require_once '../app/views/layout/masterlayout.php';
     }
 
+
+
     public function update()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $malop = $_POST['malop'];
-            $tenlop = $_POST['tenlop'];
-            $ghichu = $_POST['ghichu'];
 
             $lophocModel = $this->model('LophocModel');
 
             $lophocModel->update(
-                $malop,
-                $tenlop,
-                $ghichu
+
+                $_POST['malop'],
+
+                $_POST['tenlop'],
+
+                $_POST['ghichu']
+
             );
 
-            header('Location: index.php?url=lophoc');
+            header('Location:index.php?url=lophoc');
         }
     }
+
+
 
     public function delete($malop)
     {
@@ -85,6 +135,7 @@ class lophocController extends Controller
 
         $lophocModel->delete($malop);
 
-        header('Location: index.php?url=lophoc');
+        header('Location:index.php?url=lophoc');
     }
+
 }

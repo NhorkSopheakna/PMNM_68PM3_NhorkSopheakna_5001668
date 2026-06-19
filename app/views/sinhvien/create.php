@@ -1,33 +1,83 @@
-<h1>Thêm Sinh Viên</h1>
+<div class="form-card">
 
-<form action="index.php?url=sinhvien/store" method="post">
+    <div class="form-title">
+        Thêm thông tin sinh viên
+    </div>
 
-    <label>Mã lớp</label>
-    <select name="malop">
+    <div class="form-body">
 
-    <?php foreach($lophocs as $lop): ?>
+        <form action="index.php?url=sinhvien/store" method="post">
 
-    <option value="<?= $lop['malop'] ?>">
-        <?= $lop['tenlop'] ?>
-    </option>
+            <div class="form-group">
+                <label>Họ tên *</label>
 
-    <?php endforeach; ?>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="hoten"
+                    placeholder="Nhập họ tên sinh viên">
+            </div>
 
-    </select>
+            <div class="form-group">
+                <label>Giới tính *</label>
 
-    <p>Họ Tên</p>
-    <input type="text" name="hoten">
+                <select class="form-control" name="gioitinh">
+                    <option value="">-- Chọn giới tính --</option>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                </select>
+            </div>
 
-    <p>Giới Tính</p>
-    <input type="text" name="gioitinh">
+            <div class="form-group">
+                <label>MSSV *</label>
 
-    <p>MSSV</p>
-    <input type="text" name="mssv">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="mssv"
+                    placeholder="Nhập MSSV">
+            </div>
 
-    <br><br>
+            <div class="form-group">
+                <label>Lớp *</label>
 
-    <button type="submit">
-        Thêm Mới
-    </button>
+                <select class="form-control" name="malop">
 
-</form>
+                    <option value="">
+                        -- Chọn lớp --
+                    </option>
+
+                    <?php foreach($lophocs as $lop): ?>
+
+                    <option value="<?= $lop['malop'] ?>">
+                        <?= $lop['tenlop'] ?>
+                    </option>
+
+                    <?php endforeach; ?>
+
+                </select>
+            </div>
+
+            <div class="form-action">
+
+                <button class="btn-save">
+                    Thêm
+                </button>
+
+                <a class="btn-cancel"
+                   href="index.php?url=sinhvien">
+                    Hủy
+                </a>
+
+                <a class="btn-back"
+                   href="index.php?url=sinhvien">
+                    Quay lại
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

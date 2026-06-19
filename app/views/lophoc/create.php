@@ -1,35 +1,62 @@
-<h1>Thêm lớp học</h1>
+<div class="form-card">
 
-<form
-action="index.php?url=lophoc/store"
-method="POST">
+    <div class="form-title">
+        Thêm thông tin lớp học
+    </div>
 
-    <p>Mã lớp</p>
+    <div class="form-body">
 
-    <input
-    type="text"
-    name="malop">
+        <form action="index.php?url=lophoc/store" method="post">
 
-    <br><br>
+            <div class="form-group">
+                <label>Mã lớp *</label>
 
-    <p>Tên lớp</p>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="malop"
+                    placeholder="Nhập mã lớp">
+            </div>
 
-    <input
-    type="text"
-    name="tenlop">
+            <div class="form-group">
+                <label>Tên lớp *</label>
 
-    <br><br>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="tenlop"
+                    placeholder="Nhập tên lớp">
+            </div>
 
-    <p>Ghi chú</p>
+            <div class="form-group">
+                <label>Ghi chú</label>
 
-    <input
-    type="text"
-    name="ghichu">
+                <textarea
+                    class="form-control"
+                    name="ghichu"
+                    placeholder="Nhập ghi chú"></textarea>
+            </div>
 
-    <br><br>
+            <div class="form-action">
 
-    <button type="submit">
-        Thêm
-    </button>
+                <button class="btn-save">
+                    Thêm
+                </button>
 
-</form>
+                <a class="btn-cancel"
+                   href="index.php?url=lophoc">
+                    Hủy
+                </a>
+
+                <a class="btn-back"
+                   href="index.php?url=lophoc">
+                    Quay lại
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

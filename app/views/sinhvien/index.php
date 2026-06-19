@@ -1,72 +1,206 @@
-<h1>Danh Sách Sinh Viên</h1>
+<h1>
+    Danh sách sinh viên
+    <span class="badge-count">
+        <?= $totalRecord ?>
+    </span>
+</h1>
 
-<div style="display:flex;justify-content:space-between;align-items:center;">
+<div class="top-bar">
 
-    <a
-    class="btn-add"
-    href="index.php?url=sinhvien/create">
-        + Thêm mới
-    </a>
+    <form class="search-form">
 
-    <form>
+        <input
+            type="hidden"
+            name="url"
+            value="sinhvien">
 
-        <input type="text"
-        name="search">
+        <input
+            type="text"
+            name="search"
+            placeholder="Tìm MSSV, họ tên..."
+            value="<?= $search ?>">
 
         <select name="malop">
 
-        <option value="">
-        --- Tất cả lớp ---
-        </option>
+            <option value="">
+                -- Tất cả lớp --
+            </option>
+
+            <?php foreach($lophocs as $lop): ?>
+
+            <option
+                value="<?= $lop['malop'] ?>"
+                <?= ($malop == $lop['malop']) ? 'selected' : '' ?>>
+
+                <?= $lop['tenlop'] ?>
+
+            </option>
+
+            <?php endforeach; ?>
 
         </select>
 
-        <button>Tìm kiếm</button>
+        <button class="btn-search">
+            Tìm kiếm
+        </button>
 
-        <a>Đặt lại</a>
+        <a
+            class="btn-reset"
+            href="index.php?url=sinhvien">
+
+            Đặt lại
+
+        </a>
 
     </form>
+
+
+
+    <div class="right-area">
+
+        <div class="page-size">
+
+            Hiển thị:
+
+            <select
+                onchange="
+                location.href='index.php?url=sinhvien&pageSize='+this.value
+                +'&search=<?= $search ?>'
+                +'&malop=<?= $malop ?>'
+                +'&sort=<?= $sort ?>'
+                ">
+
+                <option value="5"
+                <?= ($pageSize == 5) ? 'selected' : '' ?>>
+                    5
+                </option>
+
+                <option value="10"
+                <?= ($pageSize == 10) ? 'selected' : '' ?>>
+                    10
+                </option>
+
+                <option value="20"
+                <?= ($pageSize == 20) ? 'selected' : '' ?>>
+                    20
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <a
+            class="btn-add"
+            href="index.php?url=sinhvien/create">
+
+            + Thêm sinh viên
+
+        </a>
+
+    </div>
 
 </div>
 
 <br>
-<br>
 
-<table border="1" cellpadding="10">
+<table class="table">
 
     <tr>
+
         <th>STT</th>
-        <th>Họ tên</th>
+
+        <th>
+
+            <a
+            class="sort-link"
+            href="index.php?url=sinhvien
+            &search=<?= $search ?>
+            &malop=<?= $malop ?>
+            &sort=mssv
+            &pageSize=<?= $pageSize ?>">
+
+                MSSV ▲
+
+            </a>
+
+        </th>
+
+        <th>
+
+            <a
+            class="sort-link"
+            href="index.php?url=sinhvien
+            &search=<?= $search ?>
+            &malop=<?= $malop ?>
+            &sort=hoten
+            &pageSize=<?= $pageSize ?>">
+
+                Họ tên ▲
+
+            </a>
+
+        </th>
+
         <th>Giới tính</th>
-        <th>MSSV</th>
+
+        <th>Lớp học</th>
+
         <th>Thao tác</th>
+
     </tr>
 
     <?php foreach($sinhviens as $sv): ?>
 
     <tr>
 
-        <td><?= $sv['stt'] ?></td>
-        <td><?= $sv['ten'] ?></td>
-        <td><?= $sv['gioitinh'] ?></td>
-        <td><?= $sv['mssv'] ?></td>
+        <td>
+            <?= $sv['stt'] ?>
+        </td>
 
-    <td>
+        <td>
+            <?= $sv['mssv'] ?>
+        </td>
 
-        <a
-        class="btn-edit"
-        href="index.php?url=sinhvien/edit/<?= $sv['stt'] ?>">
-            Sửa
-        </a>
+        <td>
+            <?= $sv['ten'] ?>
+        </td>
 
-        <a
-        class="btn-delete"
-        href="index.php?url=sinhvien/delete/<?= $sv['stt'] ?>"
-        onclick="return confirm('Xóa sinh viên này?')">
-            Xóa
-        </a>
+        <td>
+            <?= $sv['gioitinh'] ?>
+        </td>
 
-    </td>
+        <td>
+
+            <span class="lop-badge">
+
+                <?= $sv['tenlop'] ?>
+
+            </span>
+
+        </td>
+
+        <td>
+
+            <a
+            class="btn-edit"
+            href="index.php?url=sinhvien/edit/<?= $sv['stt'] ?>">
+
+                Sửa
+
+            </a>
+
+            <a
+            class="btn-delete"
+            onclick="return confirm('Xóa sinh viên này?')"
+            href="index.php?url=sinhvien/delete/<?= $sv['stt'] ?>">
+
+                Xóa
+
+            </a>
+
+        </td>
 
     </tr>
 
@@ -74,16 +208,57 @@
 
 </table>
 
+<?php
+$from = ($page - 1) * $pageSize + 1;
+
+if ($totalRecord == 0)
+{
+    $from = 0;
+}
+
+$to = min($page * $pageSize, $totalRecord);
+?>
+
+<br>
+
+<div class="record-info">
+
+    Hiển thị
+
+    <b><?= $from ?></b>
+
+    -
+
+    <b><?= $to ?></b>
+
+    trong
+
+    <b><?= $totalRecord ?></b>
+
+    bản ghi
+
+</div>
+
 <br>
 
 <div class="pagination">
 
-<?php for($i=1;$i<=$totalPage;$i++): ?>
+<?php for($i = 1; $i <= $totalPage; $i++): ?>
 
-    <a
-    href="index.php?url=sinhvien&page=<?= $i ?>&search=<?= $search ?>">
-        <?= $i ?>
-    </a>
+<a
+
+class="<?= ($page == $i) ? 'active-page' : '' ?>"
+
+href="index.php?url=sinhvien
+&page=<?= $i ?>
+&search=<?= $search ?>
+&malop=<?= $malop ?>
+&sort=<?= $sort ?>
+&pageSize=<?= $pageSize ?>">
+
+<?= $i ?>
+
+</a>
 
 <?php endfor; ?>
 
